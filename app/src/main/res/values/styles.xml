@@ -73,6 +73,15 @@
         <item name="isMainColorDark">true</item>
     </style>
 
+    <style name="LauncherThemeTransparent" parent="@style/LauncherThemeDark">
+        <item name="allAppsScrimColor">#00FFFFFF</item>
+        <item name="workspaceStatusBarScrim">@null</item>
+    </style>
+
+    <style name="GoogleSearchLauncherThemeTransparent" parent="@style/LauncherThemeTransparent">
+       <!-- <item name="android:keyboardLayout">@layout/search_container_all_apps_google</item>-->
+    </style>
+
     <style name="LauncherThemeDark.DarKText" parent="@style/LauncherThemeDark">
         <item name="allAppsInterimScrimAlpha">25</item>
         <item name="workspaceTextColor">#FF212121</item>

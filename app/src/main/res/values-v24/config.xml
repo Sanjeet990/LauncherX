@@ -5,6 +5,7 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <!--<item>4</item>-->
     </string-array>
 
     <string-array name="theme_override_names" translatable="false">
@@ -12,5 +13,7 @@
         <item>@string/theme_default</item>
         <item>@string/theme_light</item>
         <item>@string/theme_dark</item>
+        <!--<item>@string/theme_transparent</item>-->
     </string-array>
+    <string name="theme_transparent">Transparent</string>
 </resources>

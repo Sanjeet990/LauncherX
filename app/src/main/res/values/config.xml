@@ -78,13 +78,13 @@
 
     <!-- Name of a subclass of com.github.Sanjeet990.launcher3.AppFilter used to
          filter the activities shown in the launcher. Can be empty. -->
-    <string name="app_filter_class" translatable="false"></string>
+    <string name="app_filter_class" translatable="false">com.github.Sanjeet990.launcher3.CustomAppFilter</string>
 
     <!-- Name of an icon provider class. -->
-    <string name="icon_provider_class" translatable="false"></string>
+    <string name="icon_provider_class" translatable="false">com.github.Sanjeet990.launcher3.CustomIconProvider</string>
 
     <!-- Name of a drawable factory class. -->
-    <string name="drawable_factory_class" translatable="false"></string>
+    <string name="drawable_factory_class" translatable="false">com.github.Sanjeet990.launcher3.CustomDrawableFactory</string>
 
     <!-- Name of a user event dispatcher class. -->
     <string name="user_event_dispatcher_class" translatable="false"></string>
@@ -157,11 +157,13 @@
         <item></item>
         <item>0</item>
         <item>2</item>
+        <!--<item>4</item>-->
     </string-array>
 
     <string-array name="theme_override_names" translatable="false">
         <item>@string/theme_automatic</item>
         <item>@string/theme_default</item>
         <item>@string/theme_dark</item>
+        <!--<item>@string/theme_transparent</item>-->
     </string-array>
 </resources>

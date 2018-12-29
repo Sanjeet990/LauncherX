@@ -345,4 +345,6 @@
     <string name="bottom_work_tab_user_education_close_button">Close</string>
     <string name="bottom_work_tab_user_education_closed">Closed</string>
     <string name="theme_title">Select theme</string>
+    <string name="pref_icon_pack">Icon Pack</string>
+    <string name="state_loading">Applying...</string>
 </resources>

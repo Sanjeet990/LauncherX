@@ -19,12 +19,16 @@ package com.github.Sanjeet990.launcher3;
 import static com.github.Sanjeet990.launcher3.states.RotationHelper.ALLOW_ROTATION_PREFERENCE_KEY;
 import static com.github.Sanjeet990.launcher3.states.RotationHelper.getAllowRotationDefaultValue;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -32,12 +36,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ListView;
@@ -45,6 +51,7 @@ import android.widget.ListView;
 import com.github.Sanjeet990.launcher3.graphics.IconShapeOverride;
 import com.github.Sanjeet990.launcher3.notification.NotificationListener;
 import com.github.Sanjeet990.launcher3.util.ListViewHighlighter;
+import com.github.Sanjeet990.launcher3.util.LooperExecutor;
 import com.github.Sanjeet990.launcher3.util.SettingsObserver;
 import com.github.Sanjeet990.launcher3.views.ButtonPreference;
 
@@ -54,6 +61,8 @@ import java.util.Objects;
  * Settings activity for Launcher. Currently implements the following setting: Allow rotation
  */
 public class SettingsActivity extends Activity {
+
+    public final static String ICON_PACK_PREF = "pref_icon_pack";
 
     private static final String ICON_BADGING_PREFERENCE_KEY = "pref_icon_badging";
     /** Hidden field Settings.Secure.NOTIFICATION_BADGING */
@@ -85,16 +94,23 @@ public class SettingsActivity extends Activity {
     /**
      * This fragment shows the launcher preferences.
      */
-    public static class LauncherSettingsFragment extends PreferenceFragment {
+    public static class LauncherSettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
+
+        private CustomIconPreference mIconPackPref;
 
         private IconBadgingObserver mIconBadgingObserver;
 
         private String mPreferenceKey;
         private boolean mPreferenceHighlighted = false;
 
+        private Context mContext;
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+
+            mContext = getActivity();
+
             if (savedInstanceState != null) {
                 mPreferenceHighlighted = savedInstanceState.getBoolean(SAVE_HIGHLIGHTED_KEY);
             }
@@ -137,6 +153,10 @@ public class SettingsActivity extends Activity {
                 // Initialize the UI once
                 rotationPref.setDefaultValue(getAllowRotationDefaultValue());
             }
+
+            mIconPackPref = (CustomIconPreference) findPreference(ICON_PACK_PREF);
+            mIconPackPref.setOnPreferenceChangeListener(this);
+
         }
 
         @Override
@@ -215,6 +235,51 @@ public class SettingsActivity extends Activity {
             } else {
                 return null;
             }
+        }
+
+        @Override
+        public boolean onPreferenceChange(Preference preference, Object newValue) {
+            switch (preference.getKey()) {
+                case ICON_PACK_PREF:
+                    ProgressDialog.show(mContext,
+                            null /* title */,
+                            mContext.getString(R.string.state_loading),
+                            true /* indeterminate */,
+                            false /* cancelable */);
+
+                    new LooperExecutor(LauncherModel.getWorkerLooper()).execute(new Runnable() {
+                        @SuppressLint("ApplySharedPref")
+                        @Override
+                        public void run() {
+                            // Clear the icon cache.
+                            LauncherAppState.getInstance(mContext).getIconCache().clear();
+
+                            // Wait for it
+                            try {
+                                Thread.sleep(1000);
+                            } catch (Exception e) {
+                                Log.e("SettingsActivity", "Error waiting", e);
+                            }
+
+                            if (Utilities.ATLEAST_MARSHMALLOW) {
+                                // Schedule an alarm before we kill ourself.
+                                Intent homeIntent = new Intent(Intent.ACTION_MAIN)
+                                        .addCategory(Intent.CATEGORY_HOME)
+                                        .setPackage(mContext.getPackageName())
+                                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                PendingIntent pi = PendingIntent.getActivity(mContext, 0,
+                                        homeIntent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_ONE_SHOT);
+                                getContext().getSystemService(AlarmManager.class).setExact(
+                                        AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + 50, pi);
+                            }
+
+                            // Kill process
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        }
+                    });
+                    return true;
+            }
+            return false;
         }
     }
 

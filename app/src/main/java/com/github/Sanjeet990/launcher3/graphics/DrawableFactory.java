@@ -32,6 +32,7 @@ import android.support.annotation.UiThread;
 import android.util.ArrayMap;
 import android.util.Log;
 import com.github.Sanjeet990.launcher3.FastBitmapDrawable;
+import com.github.Sanjeet990.launcher3.ItemInfo;
 import com.github.Sanjeet990.launcher3.ItemInfoWithIcon;
 import com.github.Sanjeet990.launcher3.R;
 import com.github.Sanjeet990.launcher3.Utilities;
@@ -70,6 +71,11 @@ public class DrawableFactory {
         drawable.setIsDisabled(info.isDisabled());
         return drawable;
     }
+
+    public FastBitmapDrawable newIcon(Bitmap icon, ItemInfo info) {
+        return new FastBitmapDrawable(icon);
+    }
+
 
     public FastBitmapDrawable newIcon(BitmapInfo info, ActivityInfo target) {
         return new FastBitmapDrawable(info);

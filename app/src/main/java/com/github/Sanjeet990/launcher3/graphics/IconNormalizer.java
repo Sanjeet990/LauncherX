@@ -42,6 +42,9 @@ import java.nio.ByteBuffer;
 
 public class IconNormalizer {
 
+    private static final Object LOCK = new Object();
+    private static IconNormalizer sIconNormalizer;
+
     private static final String TAG = "IconNormalizer";
     private static final boolean DEBUG = false;
     // Ratio of icon visible area to full icon size for a square shaped icon
@@ -382,4 +385,14 @@ public class IconNormalizer {
         float area = size * size * MAX_CIRCLE_AREA_FACTOR;
         return (int) Math.round(Math.sqrt((4 * area) / Math.PI));
     }
+
+    public static IconNormalizer getInstance(Context context) {
+        synchronized (LOCK) {
+            if (sIconNormalizer == null) {
+                sIconNormalizer = new IconNormalizer(context);
+            }
+        }
+        return sIconNormalizer;
+    }
+
 }

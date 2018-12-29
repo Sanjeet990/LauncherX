@@ -49,6 +49,8 @@ public abstract class WallpaperManagerCompat {
 
     public abstract @Nullable WallpaperColorsCompat getWallpaperColors(int which);
 
+    public abstract void updateAllListeners();
+
     public abstract void addOnColorsChangedListener(OnColorsChangedListenerCompat listener);
 
     /**

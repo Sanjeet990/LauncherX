@@ -102,6 +102,7 @@ import com.github.Sanjeet990.launcher3.states.InternalStateHandler;
 import com.github.Sanjeet990.launcher3.states.RotationHelper;
 import com.github.Sanjeet990.launcher3.touch.ItemClickHandler;
 import com.github.Sanjeet990.launcher3.uioverrides.UiFactory;
+import com.github.Sanjeet990.launcher3.uioverrides.dynamicui.WallpaperManagerCompat;
 import com.github.Sanjeet990.launcher3.userevent.nano.LauncherLogProto;
 import com.github.Sanjeet990.launcher3.userevent.nano.LauncherLogProto.Action;
 import com.github.Sanjeet990.launcher3.userevent.nano.LauncherLogProto.ContainerType;
@@ -148,6 +149,8 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
     public static final String TAG = "Launcher";
     static final boolean LOGD = false;
 
+    private final static String PREF_IS_RELOAD = "pref_reload_workspace";
+
     static final boolean DEBUG_STRICT_MODE = false;
 
     private static final int REQUEST_CREATE_SHORTCUT = 1;
@@ -162,6 +165,8 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
     private static final int REQUEST_PERMISSION_CALL_PHONE = 14;
 
     private static final float BOUNCE_ANIMATION_TENSION = 1.3f;
+
+    private String mThemeHints;
 
     /**
      * IntentStarter uses request codes starting with this. This must be greater than all activity
@@ -251,6 +256,10 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
     private final Handler mHandler = new Handler();
     private final Runnable mLogOnDelayedResume = this::logOnDelayedResume;
 
+    private String themeHints() {
+        return Utilities.getPrefs(this).getString(Utilities.THEME_OVERRIDE_KEY, "");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (DEBUG_STRICT_MODE) {
@@ -267,6 +276,8 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
                     .penaltyDeath()
                     .build());
         }
+        mThemeHints = themeHints();
+
         TraceHelper.beginSection("Launcher-onCreate");
 
         super.onCreate(savedInstanceState);
@@ -758,6 +769,16 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
         mAppWidgetHost.setListenIfResumed(true);
         NotificationListener.setNotificationsChangedListener(mPopupDataProvider);
         UiFactory.onStart(this);
+        WallpaperManagerCompat.getInstance(Launcher.this).updateAllListeners();
+        if (!mThemeHints.equals(themeHints())) {
+            Utilities.getPrefs(this).edit().putBoolean(PREF_IS_RELOAD, true).apply();
+            if (Utilities.ATLEAST_NOUGAT) {
+                recreate();
+            } else {
+                finish();
+                startActivity(getIntent());
+            }
+        }
     }
 
     private void logOnDelayedResume() {

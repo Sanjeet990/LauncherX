@@ -52,4 +52,13 @@
         android:defaultValue=""
         android:persistent="false" />
 
+    <ListPreference
+        android:key="pref_override_theme"
+        android:title="@string/theme_title"
+        android:summary="%s"
+        android:entries="@array/theme_override_names"
+        android:entryValues="@array/theme_override_values"
+        android:defaultValue=""
+        android:persistent="true" />
+
 </PreferenceScreen>

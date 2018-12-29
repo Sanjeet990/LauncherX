@@ -20,6 +20,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.util.Pair;
 
+import com.github.Sanjeet990.launcher3.Utilities;
 import com.github.Sanjeet990.launcher3.uioverrides.dynamicui.WallpaperColorsCompat;
 import com.github.Sanjeet990.launcher3.uioverrides.dynamicui.WallpaperManagerCompat;
 import com.github.Sanjeet990.launcher3.uioverrides.dynamicui.ColorExtractionAlgorithm;
@@ -43,6 +44,7 @@ public class WallpaperColorInfo implements WallpaperManagerCompat.OnColorsChange
         }
     }
 
+    private final Context mContext;
     private final ArrayList<OnChangeListener> mListeners = new ArrayList<>();
     private final WallpaperManagerCompat mWallpaperManager;
     private final ColorExtractionAlgorithm mExtractionType;
@@ -54,6 +56,7 @@ public class WallpaperColorInfo implements WallpaperManagerCompat.OnColorsChange
     private OnChangeListener[] mTempListeners;
 
     private WallpaperColorInfo(Context context) {
+        mContext = context;
         mWallpaperManager = WallpaperManagerCompat.getInstance(context);
         mWallpaperManager.addOnColorsChangedListener(this);
         mExtractionType = ColorExtractionAlgorithm.newInstance(context);
@@ -93,12 +96,17 @@ public class WallpaperColorInfo implements WallpaperManagerCompat.OnColorsChange
             mMainColor = FALLBACK_COLOR;
             mSecondaryColor = FALLBACK_COLOR;
         }
-        mSupportsDarkText = wallpaperColors != null
+        /*mSupportsDarkText = wallpaperColors != null
                 ? (wallpaperColors.getColorHints()
                 & WallpaperColorsCompat.HINT_SUPPORTS_DARK_TEXT) > 0 : false;
         mIsDark = wallpaperColors != null
                 ? (wallpaperColors.getColorHints()
-                & WallpaperColorsCompat.HINT_SUPPORTS_DARK_THEME) > 0 : false;
+                & WallpaperColorsCompat.HINT_SUPPORTS_DARK_THEME) > 0 : false;*/
+        int colorHints = Utilities.getThemeHints(mContext, wallpaperColors == null
+                ? 0
+                : wallpaperColors.getColorHints());
+        mSupportsDarkText = (colorHints & WallpaperColorsCompat.HINT_SUPPORTS_DARK_TEXT) > 0;
+        mIsDark = (colorHints & WallpaperColorsCompat.HINT_SUPPORTS_DARK_THEME) > 0;
     }
 
     public void addOnChangeListener(OnChangeListener listener) {

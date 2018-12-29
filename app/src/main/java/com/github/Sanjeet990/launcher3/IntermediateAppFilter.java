@@ -1,4 +1,4 @@
-package com.github.Sanjeet990;
+package com.github.Sanjeet990.launcher3;
 
 import android.content.ComponentName;
 import android.content.Context;

@@ -31,6 +31,8 @@ abstract class BaseFlags {
     public static final boolean IS_DOGFOOD_BUILD = false;
     public static final String AUTHORITY = "com.github.Sanjeet990.launcher3.settings".intern();
 
+    public static final boolean LAUNCHER3_DISABLE_ICON_NORMALIZATION = true;
+
     // When enabled allows to use any point on the fast scrollbar to start dragging.
     public static final boolean LAUNCHER3_DIRECT_SCROLL = true;
     // When enabled the promise icon is visible in all apps while installation an app.
@@ -41,7 +43,7 @@ abstract class BaseFlags {
     // Feature flag to enable moving the QSB on the 0th screen of the workspace.
     public static final boolean QSB_ON_FIRST_SCREEN = true;
     // When enabled the all-apps icon is not added to the hotseat.
-    public static final boolean NO_ALL_APPS_ICON = true;
+    public static boolean NO_ALL_APPS_ICON = true;
 
     // When true, custom widgets are loaded using CustomWidgetParser.
     public static final boolean ENABLE_CUSTOM_WIDGETS = false;

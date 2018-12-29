@@ -33,6 +33,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.github.Sanjeet990.launcher3.LauncherAppState;
 import com.github.Sanjeet990.launcher3.LauncherModel;
@@ -59,15 +60,16 @@ public class IconShapeOverride {
     private static final int RESTART_REQUEST_CODE = 42; // the answer to everything
 
     public static boolean isSupported(Context context) {
+
         if (!Utilities.ATLEAST_OREO) {
             return false;
         }
-        // Only supported when developer settings is enabled
+        /*// Only supported when developer settings is enabled
         if (Settings.Global.getInt(context.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0) != 1) {
             return false;
         }
-
+*/
         try {
             if (getSystemResField().get(null) != Resources.getSystem()) {
                 // Our assumption that mSystem is the system resource is not true.

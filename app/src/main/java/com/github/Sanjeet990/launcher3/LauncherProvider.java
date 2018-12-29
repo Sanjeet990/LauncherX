@@ -53,6 +53,7 @@ import com.github.Sanjeet990.launcher3.LauncherSettings.Favorites;
 import com.github.Sanjeet990.launcher3.LauncherSettings.WorkspaceScreens;
 import com.github.Sanjeet990.launcher3.compat.UserManagerCompat;
 import com.github.Sanjeet990.launcher3.config.FeatureFlags;
+import com.github.Sanjeet990.launcher3.graphics.IconShapeOverride;
 import com.github.Sanjeet990.launcher3.logging.FileLog;
 import com.github.Sanjeet990.launcher3.model.DbDowngradeHelper;
 import com.github.Sanjeet990.launcher3.provider.LauncherDbUtils;
@@ -115,6 +116,7 @@ public class LauncherProvider extends ContentProvider {
         // The content provider exists for the entire duration of the launcher main process and
         // is the first component to get created.
         MainProcessInitializer.initialize(getContext().getApplicationContext());
+        IconShapeOverride.apply(getContext());
         return true;
     }
 

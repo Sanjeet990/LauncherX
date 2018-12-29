@@ -21,7 +21,5 @@ package com.github.Sanjeet990.launcher3.config;
  */
 public final class FeatureFlags extends BaseFlags {
 
-    public static final boolean LAUNCHER3_DISABLE_ICON_NORMALIZATION = true;
-
     private FeatureFlags() {}
 }

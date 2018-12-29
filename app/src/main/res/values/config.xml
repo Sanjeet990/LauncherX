@@ -71,7 +71,7 @@
     <integer name="config_dropAnimMaxDist">800</integer>
 
     <!-- The duration of the caret animation -->
-    <integer name="config_caretAnimationDuration">200</integer>
+    <integer name="config_caretAnimationDuration">100</integer>
 
     <!-- Hotseat -->
     <bool name="hotseat_transpose_layout_with_orientation">true</bool>
@@ -106,10 +106,10 @@
 
     <!-- Whitelisted package to retrieve packagename for badge. Can be empty. -->
     <string name="shortcutinfocompat_badgepkg_whitelist" translatable="false"></string>
-    <string name="theme_automatic">Automatic</string>
-    <string name="theme_default">Default</string>
-    <string name="theme_light">Light</string>
-    <string name="theme_dark">Dark</string>
+    <string name="theme_automatic" translatable="false">Automatic</string>
+    <string name="theme_default" translatable="false">Default</string>
+    <string name="theme_light" translatable="false">Light</string>
+    <string name="theme_dark" translatable="false">Dark</string>
 
     <!-- View ID to use for QSB widget -->
     <item name="qsb_widget" type="id" />
@@ -125,7 +125,7 @@
     <item name="view_highlighted" type="id" />
 
     <!-- Popup items -->
-    <integer name="config_popupOpenCloseDuration">150</integer>
+    <integer name="config_popupOpenCloseDuration">100</integer>
     <integer name="config_popupArrowOpenDuration">80</integer>
     <integer name="config_removeNotificationViewDuration">300</integer>
 

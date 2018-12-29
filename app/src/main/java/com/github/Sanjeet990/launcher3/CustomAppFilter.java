@@ -3,8 +3,6 @@ package com.github.Sanjeet990.launcher3;
 import android.content.ComponentName;
 import android.content.Context;
 
-import com.github.Sanjeet990.IntermediateAppFilter;
-
 public class CustomAppFilter extends IntermediateAppFilter {
     private final Context mContext;
     private final boolean hasIconPack;

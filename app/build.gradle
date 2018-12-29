@@ -4,7 +4,7 @@ apply plugin: 'com.google.protobuf'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.github.songjiubin.launcher3"
+        applicationId "com.github.Sanjeet990.launcher3"
         minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
@@ -56,9 +56,9 @@ protobuf {
                 task.builtins {
                     remove java
                     javanano {
-                        option "java_package=launcher_log_extension.proto|com.github.songjiubin.launcher3.userevent.nano"
-                        option "java_package=launcher_log.proto|com.github.songjiubin.launcher3.userevent.nano"
-                        option "java_package=launcher_dump.proto|com.github.songjiubin.launcher3.model.nano"
+                        option "java_package=launcher_log_extension.proto|com.github.Sanjeet990.launcher3.userevent.nano"
+                        option "java_package=launcher_log.proto|com.github.Sanjeet990.launcher3.userevent.nano"
+                        option "java_package=launcher_dump.proto|com.github.Sanjeet990.launcher3.model.nano"
                         option "enum_style=java"
                     }
                 }

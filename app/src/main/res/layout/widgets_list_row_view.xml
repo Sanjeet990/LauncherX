@@ -25,7 +25,7 @@
 
     <!-- Section info -->
 
-    <com.github.songjiubin.launcher3.BubbleTextView
+    <com.github.Sanjeet990.launcher3.BubbleTextView
         android:id="@+id/section"
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_section_height"

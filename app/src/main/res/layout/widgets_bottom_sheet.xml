@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 
-<com.github.songjiubin.launcher3.widget.WidgetsBottomSheet
+<com.github.Sanjeet990.launcher3.widget.WidgetsBottomSheet
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -51,4 +51,4 @@
          android:layout_marginTop="45dp"
          android:layout_marginBottom="40dp"/>
 
-</com.github.songjiubin.launcher3.widget.WidgetsBottomSheet>
+</com.github.Sanjeet990.launcher3.widget.WidgetsBottomSheet>

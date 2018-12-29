@@ -14,4 +14,4 @@
      limitations under the License.
 -->
 
-<com.github.songjiubin.launcher3.views.DoubleShadowBubbleTextView style="@style/BaseIcon.Workspace" />
+<com.github.Sanjeet990.launcher3.views.DoubleShadowBubbleTextView style="@style/BaseIcon.Workspace" />

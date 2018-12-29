@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.github.songjiubin.launcher3">
+    package="com.github.Sanjeet990.launcher3">
 
     <permission
-        android:name="com.github.songjiubin.launcher3.permission.READ_SETTINGS"
+        android:name="com.github.Sanjeet990.launcher3.permission.READ_SETTINGS"
         android:description="@string/permdesc_read_settings"
         android:label="@string/permlab_read_settings"
         android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
         android:protectionLevel="signature" />
     <permission
-        android:name="com.github.songjiubin.launcher3.permission.WRITE_SETTINGS"
+        android:name="com.github.Sanjeet990.launcher3.permission.WRITE_SETTINGS"
         android:description="@string/permdesc_write_settings"
         android:label="@string/permlab_write_settings"
         android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
         android:protectionLevel="signature" />
     <permission
-        android:name="com.github.songjiubin.launcher3.permission.INSTALL_SHORTCUT"
+        android:name="com.github.Sanjeet990.launcher3.permission.INSTALL_SHORTCUT"
         android:description="@string/permdesc_install_shortcut"
         android:label="@string/permlab_install_shortcut"
         android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
         android:protectionLevel="dangerous" />
 
-    <uses-permission android:name="com.github.songjiubin.launcher3.permission.READ_SETTINGS" />
-    <uses-permission android:name="com.github.songjiubin.launcher3.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="com.github.Sanjeet990.launcher3.permission.READ_SETTINGS" />
+    <uses-permission android:name="com.github.Sanjeet990.launcher3.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
@@ -88,10 +88,10 @@
         -->
         <provider
             android:name=".LauncherProvider"
-            android:authorities="com.github.songjiubin.launcher3.settings"
+            android:authorities="com.github.Sanjeet990.launcher3.settings"
             android:exported="false"
-            android:readPermission="com.github.songjiubin.launcher3.permission.READ_SETTINGS"
-            android:writePermission="com.github.songjiubin.launcher3.permission.WRITE_SETTINGS" />
+            android:readPermission="com.github.Sanjeet990.launcher3.permission.READ_SETTINGS"
+            android:writePermission="com.github.Sanjeet990.launcher3.permission.WRITE_SETTINGS" />
 
         <!-- Intent received used to install shortcuts from other applications -->
         <receiver
@@ -152,8 +152,8 @@
         worspace configuration to the dump's file descriptor by using launcher_dump.proto
         -->
         <meta-data
-            android:name="com.github.songjiubin.launcher3.launcher_dump_provider"
-            android:value="com.github.songjiubin.launcher3.LauncherProvider" />
+            android:name="com.github.Sanjeet990.launcher3.launcher_dump_provider"
+            android:value="com.github.Sanjeet990.launcher3.LauncherProvider" />
     </application>
 
 </manifest>
